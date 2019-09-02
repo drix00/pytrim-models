@@ -24,6 +24,7 @@
 # limitations under the License.
 
 # Standard library modules.
+import sys
 
 # Third party modules.
 
@@ -41,4 +42,9 @@ def test_namespace_packages():
 
     :return:
     """
-    assert trim.__file__ is None
+    if sys.version_info.minor < 7:
+        import pytest
+        with pytest.raises(AttributeError):
+            trim.__file__
+    else:
+        assert trim.__file__ is None
