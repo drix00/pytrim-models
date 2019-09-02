@@ -1,23 +1,29 @@
 # Config file for automatic testing at travis-ci.org
 
-# This reportedly works around an issue downloading packages from pypi on
-# travis.  Consider removing this after the underlying issue is fixed.
-# https://github.com/travis-ci/travis-ci/issues/2389
-# sudo: false
-
 dist: bionic
 
 language: python
 cache: pip
 python:
-  - '3.5'
   - '3.6'
   - '3.7'
   - '3.8-dev'
 
+matrix:
+  include:
+    - name "Special python 3.5"
+      dist: xenial
+      python:
+        - '3.5'
+
 # command to install dependencies
+before_install:
+  - python --version
+  - pip install --upgrade pip
+  - pip install --upgrade pytest
+  - pip install --upgrade codecov
+
 install:
-  - pip install --upgrade pip codecov
   - pip install --upgrade -e .[develop]
   - python3 setup.py build
 
