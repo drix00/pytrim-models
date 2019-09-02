@@ -9,12 +9,10 @@ python:
   - '3.7'
   - '3.8-dev'
 
-#matrix:
-#  include:
-#    - name "Special python 3.5"
-#      dist: xenial
-#      python:
-#        - '3.5'
+matrix:
+  include:
+    - python: 3.5
+      dist: xenial
 
 # command to install dependencies
 before_install:
