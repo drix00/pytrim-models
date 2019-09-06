@@ -19,7 +19,7 @@ before_install:
   - python --version
   - pip install --upgrade pip
   - pip install --upgrade pytest
-  - pip install --upgrade codecov
+  - pip install --upgrade coveralls
 
 install:
   - pip install --upgrade -e .[develop]
@@ -30,7 +30,7 @@ script:
   - pytest --cov=trim --cov-branch --cov-report xml
 
 after_success:
-  - codecov
+  - coveralls
 
 notifications:
   email:
